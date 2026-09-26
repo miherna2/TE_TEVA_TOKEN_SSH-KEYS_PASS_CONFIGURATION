@@ -1,0 +1,20 @@
+[project]
+name = "teva-ssh-key-loader"
+version = "0.1.0"
+description = "Change the TEVA web-UI password, upload an SSH public key, and verify key-only SSH"
+requires-python = ">=3.10"
+dependencies = [
+  "httpx>=0.27,<1",
+  "netmiko>=4.4,<5",
+  "python-dotenv>=1,<2",
+]
+
+[tool.uv]
+package = false
+# cryptography 49+ ships no wheels for Intel Macs or 32-bit Windows; lift once it does.
+constraint-dependencies = ["cryptography<49"]
+required-environments = [
+  "sys_platform == 'win32'",
+  "sys_platform == 'darwin'",
+  "sys_platform == 'linux'",
+]
